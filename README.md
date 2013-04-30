@@ -1,4 +1,4 @@
-Site
-====
+WebRookies.github.io
+====================
 
-Home page for WebRookies.org
+The public page for code.webrookies.org

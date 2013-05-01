@@ -1,7 +1,7 @@
 window.App = Ember.Application.create();
 
 App.Store = DS.Store.extend({
-  revision: 4,
+  revision: 12,
   adapter: DS.fixtureAdapter
 });
 
@@ -20,7 +20,7 @@ App.IndexController = Ember.Controller.extend({
   appName: 'Web Rookies'
 });
 
-App.PostsController = Ember.Controller.extend({
+App.PostsRoute = Ember.Route.extend({
     model: function() {
       return App.Post.find();
     }
@@ -35,16 +35,16 @@ App.Post = DS.Model.extend({
 });
 
 App.Post.FIXTURES = [{
-  "id": 1,
-  "title": "test 1",
-  "author": "david",
+  id: 1,
+  title: "test 1",
+  author: "david",
   publishedAt: new Date('05-01-2013'),
   intro: "asdfasdfafadfgagagaereghadfgasgasdfasdfasdgadfhadgasdfsadfds",
   extended: "asdfasdfafadfgagagaereghadfgasgasdfasdfasdgadfhadgasdfsadfdsasdfasdfasdfasgadfgadfgadfgdfgdsfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgdsf"
 }, {
-  "id": 2,
-  "title": "test 2",
-  "author": "pierce",
+  id: 2,
+  title: "test 2",
+  author: "pierce",
   publishedAt: new Date('05-02-2013'),
   intro: "asdfasdfafadfgagagaereghadfgasgasdfasdfasdgadfhadgasdfsadfds",
   extended: "asdfasdfafadfgagagaereghadfgasgasdfasdfasdgadfhadgasdfsadfdsasdfasdfasdfasgadfgadfgadfgdfgdsfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgdsf"

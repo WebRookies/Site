@@ -6,11 +6,10 @@
   <link href="http://fonts.googleapis.com/css?family=Quicksand:300" rel="stylesheet" type="text/css">
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="css/flat-ui.css" rel="stylesheet" type="text/css">
-  <link href="css/style.css" rel="stylesheet" type="text/css">
-</head>
+  <link href="css/style.css" rel="stylesheet" type="text/css"></head>
 <body>
 
-  <script type="text/x-handlebars" data-template-name="index">
+  <script type="text/x-handlebars">
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="navbar navbar-fixed-top navbar-inverse">
@@ -20,18 +19,51 @@
                 <ul class="nav">
                   <li>{{#linkTo 'tutorials'}}Tutorials{{/linkTo}}</li>
                   <li><a href="http://meetup.webrookies.org">Meetup</a></li>
-                  <li>{{#linkTo 'posts'}}Blog{{/linkTo}}</li>
+                  <li class="blog">{{#linkTo 'posts'}}Blog{{/linkTo}}</li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
-        <div class="squares"></div>
-        <h1 class="text-center">{{appName}}</h1>
+      </div>
+      <div class="row-fluid">
+        {{outlet}}
       </div>
     </div>
   </script>
-  
+
+  <script type="text/x-handlebars" data-template-name="index">
+    <div class="squares"></div>
+    <h1 class="text-center">{{appName}}</h1>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="tutorials">
+    <div class="content">
+      <p>test</p>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="posts">
+    <div class="content span6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Recent Posts</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each model}}
+          <tr>
+            <td>
+              <a href="#">{{title}} <small class="muted">by {{author}}</small></a>
+            </td>
+          <tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </script>
+
   <script src="js/libs/jquery-1.9.1.js"></script>
   <script src="js/libs/handlebars-1.0.0-rc.3.js"></script>
   <script src="js/libs/ember-1.0.0-rc.1.js"></script>

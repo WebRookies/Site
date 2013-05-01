@@ -1,14 +1,13 @@
-window.App = Ember.Application.create({
-  LOG_TRANSITION: true
+window.App = Ember.Application.create();
+
+App.Store = DS.Store.extend({
+  revision: 4,
+  adapter: DS.fixtureAdapter
 });
 
 App.Router.map(function() {
   this.resource('posts');
-  this.resource('post', { path: '/post/:post_id' }, function() {
-    this.route('edit');
-  });
-  this.route("meetup", { path: "meetup.webrookies.org" });
-  this.route("tutorials", { path: "/tutorials" });
+  this.resource('tutorials');
 });
 
 App.IndexRoute = Ember.Route.extend({
@@ -17,16 +16,14 @@ App.IndexRoute = Ember.Route.extend({
   }
 });
 
-App.Store = DS.Store.extend({
-  revision: 12,
-  adapter: 'DS.FixtureAdapter'
+App.IndexController = Ember.Controller.extend({
+  appName: 'Web Rookies'
 });
 
-App.IndexController = Ember.Controller.extend({
-  appName: 'Web Rookies',
-  links: function() {
-
-  }
+App.PostsController = Ember.Controller.extend({
+    model: function() {
+      return App.Post.find();
+    }
 });
 
 App.Post = DS.Model.extend({
@@ -37,31 +34,18 @@ App.Post = DS.Model.extend({
   publishedAt: DS.attr('date')
 });
 
-App.PostRoute = Ember.Route.extend({
-    // activate: function() {},
-    // deactivate: function() {},
-    setupController: function(controller, model) {
-      controller.set('content', model);
-    },
-    renderTemplate: function() {
-      this.render({
-        into: 'posts',
-        outlet: 'posts',
-        controller: 'blogPost'
-      });
-    },
-    model: function(params) {
-        return App.Post.find(params.post_id);
-    }
-});
-
-App.TutorialsRoute = Ember.Route.extend({
-    // activate: function() {},
-    // deactivate: function() {},
-    setupController: function(controller, model) {},
-    // renderTemplate: function() {},
-
-    model: function() {
-        return ;
-    }
-});
+App.Post.FIXTURES = [{
+  "id": 1,
+  "title": "test 1",
+  "author": "david",
+  publishedAt: new Date('05-01-2013'),
+  intro: "asdfasdfafadfgagagaereghadfgasgasdfasdfasdgadfhadgasdfsadfds",
+  extended: "asdfasdfafadfgagagaereghadfgasgasdfasdfasdgadfhadgasdfsadfdsasdfasdfasdfasgadfgadfgadfgdfgdsfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgdsf"
+}, {
+  "id": 2,
+  "title": "test 2",
+  "author": "pierce",
+  publishedAt: new Date('05-02-2013'),
+  intro: "asdfasdfafadfgagagaereghadfgasgasdfasdfasdgadfhadgasdfsadfds",
+  extended: "asdfasdfafadfgagagaereghadfgasgasdfasdfasdgadfhadgasdfsadfdsasdfasdfasdfasgadfgadfgadfgdfgdsfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgdsf"
+}];
